@@ -8,6 +8,8 @@ return {
   n = {
     -- second key is the lefthand side of the map
     -- mappings seen under group name "Buffer"
+    ["<C-d>"] = { "<C-d>zz", desc = "Move vertical-down and center" },
+    ["<C-u>"] = { "<C-u>zz", desc = "Move vertical-up and center" },
     ["<leader>bn"] = { "<cmd>tabnew<cr>", desc = "New tab" },
     ["<leader>bD"] = {
       function()
@@ -18,13 +20,66 @@ return {
     -- tables with the `name` key will be registered with which-key if it's installed
     -- this is useful for naming menus
     ["<leader>b"] = { name = "Buffers" },
+
+     -- better buffer navigation
+    ["]b"] = false,
+    ["[b"] = false,
+    ["<S-l>"] = {
+      function() require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end,
+      desc = "Next buffer",
+    },
+    ["<S-h>"] = {
+      function() require("astronvim.utils.buffer").nav(-(vim.v.count > 0 and vim.v.count or 1)) end,
+      desc = "Previous buffer",
+    },
+    -- octo plugin mappings
+    ["<leader>G"] = { name = " GitHub" },
+    ["<leader>Gi"] = { "<cmd>Octo issue list<cr>", desc = "Open Issues" },
+    ["<leader>GI"] = { "<cmd>Octo issue search<cr>", desc = "Search Issues" },
+    ["<leader>Gp"] = { "<cmd>Octo pr list<cr>", desc = "Open PRs" },
+    ["<leader>GP"] = { "<cmd>Octo pr search<cr>", desc = "Search PRs" },
+    ["<leader>Gr"] = { "<cmd>Octo repo list<cr>", desc = "Open Repository" },
     -- quick save
     -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
+    
+    ["<leader>s"] = { desc = "󰛔 Search/Replace" },
+    ["<leader>ss"] = { function() require("spectre").open() end, desc = "Spectre" },
+    ["<leader>sf"] = { function() require("spectre").open_file_search() end, desc = "Spectre (current file)" },
+    ["<leader>sw"] = {
+      function() require("spectre").open_visual { select_word = true } end,
+      desc = "Spectre (current word)",
+    },
+    -- vim-sandwich
+    ["s"] = "<Nop>",
+    ["<leader>n"] = { "<cmd>enew<cr>", desc = "New File" },
+    ["<leader>N"] = { "<cmd>tabnew<cr>", desc = "New Tab" },
+    ["<leader><cr>"] = { '<esc>/<++><cr>"_c4l', desc = "Next Template" },
+    ["<leader>."] = { "<cmd>cd %:p:h<cr>", desc = "Set CWD" },
+
+    -- trouble
+    ["<leader>x"] = { desc = "󰒡 Trouble" },
+    ["<leader>xx"] = { "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },
+    ["<leader>xX"] = { "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
+    ["<leader>xl"] = { "<cmd>TroubleToggle loclist<cr>", desc = "Location List (Trouble)" },
+    ["<leader>xq"] = { "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" },
+    ["<leader>xT"] = { "<cmd>TodoTrouble<cr>", desc = "TODOs (Trouble)" },
   },
+
+  v = {
+    ["<leader>r"] = { "<Plug>Send", desc = "Send to REPL" },
+    ["<leader>s"] = { function() require("spectre").open_visual() end, desc = "Spectre" },
+  },
+
   t = {
     -- setting a mapping to false will disable it
     -- ["<esc>"] = false,
+    ["<esc><esc>"] = { "<C-\\><C-n>:q<cr>", desc = "Terminal quit" },
   },
+
+  x = {
+    -- vim-sandwich
+    ["s"] = "<Nop>",
+  }
 }
 -- local utils = require "astronvim.utils"
 -- local is_available = utils.is_available

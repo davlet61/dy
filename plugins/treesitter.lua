@@ -5,7 +5,17 @@ return {
     local rainbow = require "ts-rainbow"
     -- Automatically install missing parsers when entering buffer
     opts.auto_install = true
+    opts.ensure_installed = {
+      'typescript',
+      'graphql',
+      'lua',
+      'json',
+      'http',
+    }
     opts.config = require("nvim-treesitter.configs").setup({
+      autotag = {
+        enable = true,
+       },  
       rainbow = {
         enable = true,
         query = {
