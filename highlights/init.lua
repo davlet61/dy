@@ -24,6 +24,10 @@ return
       local bg_alt = get_hlgroup("Visual").bg
       local green = get_hlgroup("String").fg
       local red = get_hlgroup("Error").fg
+      local float_bg = get_hlgroup("NormalFloat").bg
+
+    -- vim.api.nvim_out_write(vim.inspect(get_hlgroup("NormalFloat").fg) .. "\n")
+
       -- return a table of highlights for telescope based on colors gotten from highlight groups
       return {
         CursorLineFold = { link = "CursorLineNr" }, -- highlight fold indicator as well as line number
@@ -32,18 +36,18 @@ return
         OctoEditable = { fg = "NONE", bg = "NONE" }, -- use treesitter for octo.nvim highlighting
         
         -- Telescope
-        TelescopeBorder = { fg = bg_alt, bg = bg },
-        TelescopeNormal = { bg = bg },
-        TelescopePreviewBorder = { fg = bg, bg = bg },
-        TelescopePreviewNormal = { bg = bg },
+        TelescopeBorder = { fg = bg_alt, bg = float_bg },
+        TelescopeNormal = { bg = float_bg },
+        TelescopePreviewBorder = { fg = float_bg, bg = float_bg },
+        TelescopePreviewNormal = { bg = float_bg },
         TelescopePreviewTitle = { fg = bg, bg = green },
         TelescopePromptBorder = { fg = bg_alt, bg = bg_alt },
         TelescopePromptNormal = { fg = fg, bg = bg_alt },
         TelescopePromptPrefix = { fg = red, bg = bg_alt },
-        TelescopePromptTitle = { fg = bg, bg = red },
-        TelescopeResultsBorder = { fg = bg, bg = bg },
-        TelescopeResultsNormal = { bg = bg },
-        TelescopeResultsTitle = { fg = bg, bg = bg },
+        TelescopePromptTitle = { fg = float_bg, bg = red },
+        TelescopeResultsBorder = { fg = float_bg, bg = float_bg },
+        TelescopeResultsNormal = { bg = float_bg },
+        TelescopeResultsTitle = { fg = float_bg, bg = float_bg },
       }
     end
   
